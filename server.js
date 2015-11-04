@@ -21,7 +21,7 @@ app.get('/todos', function (req, res) {
 
 	if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'true') {
 		filteredTodos = _.where(filteredTodos, {completed: true});
-	} else if  (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false') { 
+	} else if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false') { 
 		filteredTodos = _.where(filteredTodos, {completed: false});
 	}
 	
