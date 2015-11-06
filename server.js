@@ -94,9 +94,9 @@ app.delete('/todos/:id', function (req, res) {
 app.put('/todos/:id', function (req, res) {
 	var todoId = parseInt(req.params.id, 10);
 	var body = _.pick(req.body, 'description', 'completed');
-	var attributes = {};
 
 	if (body.hasOwnProperty('completed')) {
+	var attributes = {};
 		attributes.completed = body.completed;
 	} 
 
@@ -119,10 +119,21 @@ app.put('/todos/:id', function (req, res) {
 	});
 });
 
+app.post ('/users', function (req, res) {
+	var body = _.pick(req.body, 'email', 'password');
+
+	db.user.create(body).then(function (user) {
+		res.json(user.toJSON());
+	}, function (e) {
+		res.status(400).json(e);
+
+	});
+});
+
+
+
 db.sequelize.sync().then(function () {
 	app.listen(PORT, function () {
 		console.log('Express listening on port ' + PORT + '!');
 	});
 });
-
-
